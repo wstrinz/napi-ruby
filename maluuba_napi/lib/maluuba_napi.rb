@@ -1,5 +1,54 @@
-require "maluuba_napi/version"
+require_relative 'maluuba_napi/version'
+require 'httparty'
+require 'uri'
 
 module MaluubaNapi
-  # Your code goes here...
+  # Provides simple access to the Maluuba NLP API (http://developer.maluuba.com)
+  # for Ruby scripts.
+  #
+  # Basic usage ...
+  #
+  #http://napi.maluuba.com/v0/interpret
+  class Client
+
+    include HTTParty
+    debug_output $stdout
+    base_uri 'http://napi.maluuba.com'
+
+    attr_accessor :auth
+
+    MALUUBA_NAPI = {
+      base_url: "http://napi.maluuba.com",
+      version:  "v0"
+    }
+
+    def initialize(apikey, options={})
+      @auth = {}
+      @auth[:apikey] = apikey
+    end
+
+    def interpret(query_parameters={})
+      query "/v0/interpret", query_parameters
+    end
+
+    def normalize(query_parameters={})
+      query "/v0/normalize", query_parameters
+    end
+
+    private
+
+      def query(endpoint, query_parameters)
+        self.class.get create_get_request(endpoint, query_parameters)
+      end
+
+      def create_get_request(endpoint, query_parameters)
+        endpoint + "?" + encode_query_parameters(query_parameters.merge(@auth))
+      end
+
+      def encode_query_parameters(query_parameters)
+        URI.encode_www_form(query_parameters)
+      end
+
+  end
+
 end
