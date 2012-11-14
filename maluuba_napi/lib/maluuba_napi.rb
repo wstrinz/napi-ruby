@@ -1,7 +1,7 @@
-require_relative 'maluuba_napi/version'
-require_relative 'maluuba_napi/configuration'
-require_relative 'maluuba_napi/categories'
-require_relative 'maluuba_napi/actions'
+require 'maluuba_napi/version'
+require 'maluuba_napi/configuration'
+require 'maluuba_napi/categories'
+require 'maluuba_napi/actions'
 require 'httparty'
 require 'uri'
 
