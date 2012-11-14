@@ -44,12 +44,13 @@ Or install it yourself as:
 >> client.interpret phrase: 'Set up a meeting with Bob tomorrow night at 7 PM to discuss the TPS reports'
 => 
 {:entities=>
-  {:daterange=>[{:start=>"2012-11-15", :end=>"2012-11-16"}],
-   :title=>["meeting to discuss the tps reports"],
-   :timerange=>[{:start=>"12:00:00AM", :end=>"12:00:00AM"}],
-   :contacts=>[{:name=>"bob"}]},
- :action=>:CALENDAR_CREATE_EVENT,
- :category=>:CALENDAR
+    {:daterange=>[{:start=>"2012-11-15", :end=>"2012-11-16"}],
+     :title=>["meeting to discuss the tps reports"],
+     :timerange=>[{:start=>"12:00:00AM", :end=>"12:00:00AM"}],
+     :contacts=>[{:name=>"bob"}]
+    },
+  :action=>:CALENDAR_CREATE_EVENT,
+  :category=>:CALENDAR
 }
 >> client.normalize phrase: 'tomorrow', type: 'daterange', timezone: 'EST'
 => {:entities=>{:daterange=>[{:start=>"2012-11-15", :end=>"2012-11-16"}]}, :context=>{:timezone=>"EST"}}
