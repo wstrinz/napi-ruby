@@ -9,11 +9,13 @@ module MaluubaNapi
   #
   # Basic Usage:
   # 
-  #   client = MaluubaNapi::Client.new 'insert_apikey_here'
+  #   client = MaluubaNapi::Client.new 'your_apikey_here'
   #   client.interpret phrase: 'who is barack obama'
   #   client.normalize phrase: 'tomorrow', type: 'daterange', timezone: 'EST'
   #
-  # For more information see http://github.com/Maluuba/napi-ruby 
+  # Your apikey is your 'Consumer Key' on (http://developer.maluuba.com)
+  #
+  # For more information see (http://github.com/Maluuba/napi-ruby)
   # Also visit us on our IRC channel at #maluuba on irc.freenode.net 
   class Client
 
@@ -57,14 +59,31 @@ module MaluubaNapi
         URI.encode_www_form(query_parameters)
       end
 
-      def symbolize_response(response)
-        symbolized_hash = {}
-        response.each_pair do |k,v|
-          k == 'entities' ? 
-            symbolized_hash[k.to_sym] = v :
-            symbolized_hash[k.to_sym] = v.to_sym
-        end
-        symbolized_hash
+      # Helper method to turn response a ruby formatted hash
+      # @param [Hash] h a response hash where all the keys are strings and camel cased
+      # @return [Hash] a Ruby friendly hash where all the keys are lower cased symbols
+      def symbolize_response(h)
+        if Hash === h
+          Hash[
+            h.map do |k, v| 
+              [k.respond_to?(:to_sym) ? k.downcase.to_sym : k, symbolize_response(v)] 
+            end 
+          ]
+        elsif Array === h
+          h.map do |e|
+            if Hash === e
+              e = Hash[
+                e.map do |k, v|
+                  [k.respond_to?(:to_sym) ? k.downcase.to_sym : k, symbolize_response(v)] 
+                end 
+              ]
+            else
+              e
+            end
+          end
+        else
+          h
+        end 
       end
 
   end
