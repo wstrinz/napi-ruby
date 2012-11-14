@@ -12,7 +12,7 @@ module MaluubaNapi
   class Client
 
     include HTTParty
-    debug_output $stdout
+    #debug_output $stdout
     base_uri 'http://napi.maluuba.com'
 
     attr_accessor :auth
@@ -28,11 +28,13 @@ module MaluubaNapi
     end
 
     def interpret(query_parameters={})
-      query "/v0/interpret", query_parameters
+      response = query "/v0/interpret", query_parameters
+      symbolize_response response.parsed_response
     end
 
     def normalize(query_parameters={})
-      query "/v0/normalize", query_parameters
+      response = query "/v0/normalize", query_parameters
+      symbolize_response response.parsed_response
     end
 
     private
@@ -47,6 +49,16 @@ module MaluubaNapi
 
       def encode_query_parameters(query_parameters)
         URI.encode_www_form(query_parameters)
+      end
+
+      def symbolize_response(response)
+        symbolized_hash = {}
+        response.each_pair do |k,v|
+          k == 'entities' ? 
+            symbolized_hash[k.to_sym] = v :
+            symbolized_hash[k.to_sym] = v.to_sym
+        end
+        symbolized_hash
       end
 
   end
