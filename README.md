@@ -22,6 +22,8 @@ Once you have been approved, you will receive an API key that you can use with t
 
 ## Installation
 
+Ruby 1.9.x is required, the easiest way to get it is to install it by following the instructions for RVM on [Ruby Downloads Page](http://www.ruby-lang.org/en/downloads/).
+
 Add this line to your application's Gemfile:
 
     gem 'maluuba_napi'
