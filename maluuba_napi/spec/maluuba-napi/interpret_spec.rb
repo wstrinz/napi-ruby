@@ -13,17 +13,17 @@ describe "Test Interpret Endpoint" do
 
       it "should test: where can I buy a hammer" do
         response = @client.interpret phrase: 'where can I buy a hammer'
-        assert_intepret response, "BUSINESS", "BUSINESS_SEARCH"
+        assert_intepret response, :BUSINESS, :BUSINESS_SEARCH
       end
 
       it "should test: i am hungry" do
         response = @client.interpret phrase: 'i am hungry'
-        assert_intepret response, "BUSINESS", "BUSINESS_SEARCH"
+        assert_intepret response, :BUSINESS, :BUSINESS_SEARCH
       end
 
       it "should test: i want some pizza" do
         response = @client.interpret phrase: 'i want some pizza'
-        assert_intepret response, "BUSINESS", "BUSINESS_SEARCH"
+        assert_intepret response, :BUSINESS, :BUSINESS_SEARCH
       end
 
     end
@@ -32,12 +32,12 @@ describe "Test Interpret Endpoint" do
 
       it "should test: book a table for 2 at an italian restaurant nearby" do
         response = @client.interpret phrase: 'book a table for 2 at an italian restaurant nearby'
-        assert_intepret response, "BUSINESS", "BUSINESS_RESERVATION"
+        assert_intepret response, :BUSINESS, :BUSINESS_RESERVATION
       end
 
       it "should test: reserve a room at a hotel" do
         response = @client.interpret phrase: 'reserve a room at a hotel'
-        assert_intepret response, "BUSINESS", "BUSINESS_RESERVATION"
+        assert_intepret response, :BUSINESS, :BUSINESS_RESERVATION
       end
 
     end
@@ -50,12 +50,12 @@ describe "Test Interpret Endpoint" do
 
       it "should test: call josh" do
         response = @client.interpret phrase: 'call josh'
-        assert_intepret response, "CALL", "CALL_DIAL"       
+        assert_intepret response, :CALL, :CALL_DIAL      
       end
 
       it "should test: call josh" do
         response = @client.interpret phrase: 'call josh'
-        assert_intepret response, "CALL", "CALL_DIAL"       
+        assert_intepret response, :CALL, :CALL_DIAL       
       end
 
     end
@@ -64,7 +64,7 @@ describe "Test Interpret Endpoint" do
 
       it "should test: did i miss any calls" do
         response = @client.interpret phrase: 'did i miss any calls'
-        assert_intepret response, "CALL", "CALL_CHECK_MISSED"       
+        assert_intepret response, :CALL, :CALL_CHECK_MISSED      
       end
 
     end
@@ -73,7 +73,7 @@ describe "Test Interpret Endpoint" do
 
       it "should test: respond to that missed call" do
         response = @client.interpret phrase: 'respond to that missed call'
-        assert_intepret response, "CALL", "CALL_RESPOND_MISSED"       
+        assert_intepret response, :CALL, :CALL_RESPOND_MISSED      
       end
 
     end
@@ -82,7 +82,7 @@ describe "Test Interpret Endpoint" do
 
       it "should test: accept this call" do
         response = @client.interpret phrase: 'accept this call'
-        assert_intepret response, "CALL", "CALL_ACCEPT_INCOMING"       
+        assert_intepret response, :CALL, :CALL_ACCEPT_INCOMING       
       end
 
     end
@@ -95,7 +95,7 @@ describe "Test Interpret Endpoint" do
       
       it "should test: add josh 5551234" do
         response = @client.interpret phrase: 'add josh 5551234'
-        assert_intepret response, "CONTACT", "CONTACT_ADD"       
+        assert_intepret response, :CONTACT, :CONTACT_ADD    
       end
 
     end
@@ -104,12 +104,12 @@ describe "Test Interpret Endpoint" do
       
       it "should test: show me adrians information" do
         response = @client.interpret phrase: 'show me adrians information'
-        assert_intepret response, "CONTACT", "CONTACT_SEARCH"       
+        assert_intepret response, :CONTACT, :CONTACT_SEARCH      
       end
 
       it "should test: what is josh's phone number" do
         response = @client.interpret phrase: "what is josh's phone number"
-        assert_intepret response, "CONTACT", "CONTACT_SEARCH"       
+        assert_intepret response, :CONTACT, :CONTACT_SEARCH        
       end
 
     end
@@ -118,7 +118,7 @@ describe "Test Interpret Endpoint" do
       
       it "should test: elizabeth is my mom" do
         response = @client.interpret phrase: 'elizabeth is my mom'
-        assert_intepret response, "CONTACT", "CONTACT_SET_ALIAS"       
+        assert_intepret response, :CONTACT, :CONTACT_SET_ALIAS        
       end
 
     end
@@ -131,22 +131,22 @@ describe "Test Interpret Endpoint" do
 
       it "should test: who is Barack Obama" do
         response = @client.interpret phrase: 'who is Barack Obama'
-        assert_intepret response, "KNOWLEDGE", "KNOWLEDGE_SEARCH"
+        assert_intepret response, :KNOWLEDGE, :KNOWLEDGE_SEARCH
       end
 
       it "should test: who is the president" do
         response = @client.interpret phrase: 'who is the president'
-        assert_intepret response, "KNOWLEDGE", "KNOWLEDGE_SEARCH"
+        assert_intepret response, :KNOWLEDGE, :KNOWLEDGE_SEARCH
       end
 
       it "should test: what is two plus two" do
         response = @client.interpret phrase: 'what is two plus two'
-        assert_intepret response, "KNOWLEDGE", "KNOWLEDGE_SEARCH"  
+        assert_intepret response, :KNOWLEDGE, :KNOWLEDGE_SEARCH 
       end
 
       it "should test: what is the tallest mountain" do
         response = @client.interpret phrase: 'what is the tallest mountain'
-        assert_intepret response, "KNOWLEDGE", "KNOWLEDGE_SEARCH"
+        assert_intepret response, :KNOWLEDGE, :KNOWLEDGE_SEARCH
       end      
 
     end
