@@ -16,4 +16,5 @@ Gemfile.lock
 # YARD artifacts
 .yardoc
 _yardoc
+doc.zip
 doc/

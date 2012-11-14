@@ -1,5 +1,7 @@
 require_relative 'maluuba_napi/version'
 require_relative 'maluuba_napi/configuration'
+require_relative 'maluuba_napi/categories'
+require_relative 'maluuba_napi/actions'
 require 'httparty'
 require 'uri'
 
@@ -34,7 +36,10 @@ module MaluubaNapi
     # @param [Hash] query_parameters a hash of query parameters, :phrase is required
     # @return [Hash] a hash consisting of :entities, :category and :action
     def interpret(query_parameters={})
-      query "/#{MaluubaNapi::Configuration::VERSION}/interpret", query_parameters      
+      response = query "/#{MaluubaNapi::Configuration::VERSION}/interpret", query_parameters
+      response[:category] = response[:category].to_sym
+      response[:action] = response[:action].to_sym
+      response
     end
 
     # Calls the {http://developer.maluuba.com/normalize-api Normalize Endpoint}

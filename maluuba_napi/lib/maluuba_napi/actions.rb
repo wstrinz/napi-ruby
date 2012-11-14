@@ -79,5 +79,6 @@ module MaluubaNapi
     def self.valid?(arg)
       ALL.include? arg
     end
+  end
 
 end
