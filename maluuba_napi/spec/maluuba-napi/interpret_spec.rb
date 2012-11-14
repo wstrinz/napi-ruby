@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "Test Interpret Endpoint" do
   
   before do
-    @client = MaluubaNapi::Client.new 'UJ74UkOwAmJISTJfiIGVU8OhsGeHnts6'
+    @client = MaluubaNapi::Client.new 'your_apikey_here'
   end
 
 
