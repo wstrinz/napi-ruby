@@ -36,6 +36,11 @@ Or install it yourself as:
 
     $ gem install maluuba_napi
 
+Yard Docs
+--------
+
+Complete Yard Docs for the client library can be found [here](http://http://maluuba-napi-ruby.s3-website-us-east-1.amazonaws.com/).
+
 ## Usage
 
 ```ruby
