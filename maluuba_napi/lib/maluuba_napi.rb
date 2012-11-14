@@ -28,19 +28,18 @@ module MaluubaNapi
     end
 
     def interpret(query_parameters={})
-      response = query "/v0/interpret", query_parameters
-      symbolize_response response.parsed_response
+      query "/v0/interpret", query_parameters      
     end
 
     def normalize(query_parameters={})
-      response = query "/v0/normalize", query_parameters
-      symbolize_response response.parsed_response
+      query "/v0/normalize", query_parameters
     end
 
     private
 
       def query(endpoint, query_parameters)
-        self.class.get create_get_request(endpoint, query_parameters)
+        response = self.class.get create_get_request(endpoint, query_parameters)
+        symbolize_response response.parsed_response
       end
 
       def create_get_request(endpoint, query_parameters)
