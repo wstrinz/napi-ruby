@@ -1,4 +1,5 @@
 require_relative 'maluuba_napi/version'
+require_relative 'maluuba_napi/configuration'
 require 'httparty'
 require 'uri'
 
@@ -6,33 +7,39 @@ module MaluubaNapi
   # Provides simple access to the Maluuba NLP API (http://developer.maluuba.com)
   # for Ruby scripts.
   #
-  # Basic usage ...
+  # Basic Usage:
+  # 
+  #   client = MaluubaNapi::Client.new 'insert_apikey_here'
+  #   client.interpret phrase: 'who is barack obama'
+  #   client.normalize phrase: 'tomorrow', type: 'daterange', timezone: 'EST'
   #
-  #http://napi.maluuba.com/v0/interpret
+  # For more information see http://github.com/Maluuba/napi-ruby 
+  # Also visit us on our IRC channel at #maluuba on irc.freenode.net 
   class Client
 
     include HTTParty
-    #debug_output $stdout
-    base_uri 'http://napi.maluuba.com'
+    base_uri MaluubaNapi::Configuration::BASE_URI
 
-    attr_accessor :auth
-
-    MALUUBA_NAPI = {
-      base_url: "http://napi.maluuba.com",
-      version:  "v0"
-    }
-
+    # Creates a new client object
+    # @param [String] apikey the consumer_key given
+    # @param option [Hash] options optional parameters
     def initialize(apikey, options={})
       @auth = {}
       @auth[:apikey] = apikey
     end
 
+    # Calls the {http://developer.maluuba.com/interpret-api Interpret Endpoint}
+    # @param [Hash] query_parameters a hash of query parameters, :phrase is required
+    # @return [Hash] a hash consisting of :entities, :category and :action
     def interpret(query_parameters={})
-      query "/v0/interpret", query_parameters      
+      query "/#{MaluubaNapi::Configuration::VERSION}/interpret", query_parameters      
     end
 
+    # Calls the {http://developer.maluuba.com/normalize-api Normalize Endpoint}
+    # @param [Hash] query_parameters a hash of query parameters, :phrase and :type required
+    # @return [Hash] a hash consisting of :entities and :context
     def normalize(query_parameters={})
-      query "/v0/normalize", query_parameters
+      query "/#{MaluubaNapi::Configuration::VERSION}/normalize", query_parameters
     end
 
     private
