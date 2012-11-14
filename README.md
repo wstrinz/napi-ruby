@@ -37,10 +37,22 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
+>> require 'rubygems'
+>> require 'maluuba_napi'
 >> client = MaluubaNapi::Client.new 'your_apikey_here'
->> client.interpret phrase: 'who is barack obama'
+=> #<MaluubaNapi::Client:0x007fd17ca01ba8 @auth={:apikey=>"your_apikey_here"}> 
+>> client.interpret phrase: 'Set up a meeting with Bob tomorrow night at 7 PM to discuss the TPS reports'
+=> 
+{:entities=>
+  {:daterange=>[{:start=>"2012-11-15", :end=>"2012-11-16"}],
+   :title=>["meeting to discuss the tps reports"],
+   :timerange=>[{:start=>"12:00:00AM", :end=>"12:00:00AM"}],
+   :contacts=>[{:name=>"bob"}]},
+ :action=>:CALENDAR_CREATE_EVENT,
+ :category=>:CALENDAR
+}
 >> client.normalize phrase: 'tomorrow', type: 'daterange', timezone: 'EST'
-
+=> {:entities=>{:daterange=>[{:start=>"2012-11-15", :end=>"2012-11-16"}]}, :context=>{:timezone=>"EST"}}
 ```
 
 ## Contributing
