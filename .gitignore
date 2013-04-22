@@ -18,3 +18,5 @@ Gemfile.lock
 _yardoc
 doc.zip
 doc/
+.ruby-version
+.rvmrc
