@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
   gem.summary       = %q{MaluubaNapi is a simple wrapper for consuming the Maluuba NLP API}
   gem.homepage      = "http://github.com/Maluuba/napi-ruby"
 
-  gem.add_dependency 'httparty', '~> 0.9.0'
+  gem.add_dependency 'httparty', '~> 0.10.0'
 
   gem.add_development_dependency 'rspec'
   gem.add_development_dependency 'yard'
